@@ -5,6 +5,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RGR</title>
+    <style>
+        #cube {
+            margin: auto;
+            position: relative;
+            width: 200px;
+            height: 200px;
+            transform-style: preserve-3d;
+            animation: rotate 5s infinite linear;
+        }
+
+        .face {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background-size: cover;
+        }
+
+        .front {
+            transform: translateZ(100px);
+        }
+
+        .back {
+            transform: rotateY(180deg) translateZ(100px);
+        }
+
+        .left {
+            transform: rotateY(-90deg) translateZ(100px);
+        }
+
+        .right {
+            transform: rotateY(90deg) translateZ(100px);
+        }
+
+        .top {
+            transform: rotateX(90deg) translateZ(100px);
+        }
+
+        .bottom {
+            transform: rotateX(-90deg) translateZ(100px);
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotateY(0deg);
+            }
+
+            100% {
+                transform: rotateY(360deg);
+            }
+        }
+    </style>
 </head>
 
 <body
@@ -27,14 +78,64 @@
                     <br>
                 <p align="center" style="font-family: Harlow Solid Italic Black; font-size: 140%;">
                     <i>
-                        Voronezh, Lenin street, +79009113131
+                        Voronezh, Lenin street, +79009113131, zoo@gmail.com
                     </i>
                 </p>
                 </p>
             </td>
         </tr>
     </table>
+    <script>
+        function greetUser() {
+            var name = prompt('Введите ваше имя:');
+            if (name !== null && name !== '') {
+                var greeting = document.createElement('h1');
+                greeting.style.textAlign = 'center';
+                greeting.textContent = 'Привет, ' + name.toUpperCase() + '!';
+                greeting.style.color = 'black';
+                greeting.style.backgroundColor = 'pink';
+                greeting.style.borderRadius = '10px';
+                document.body.appendChild(greeting);
+                var currentDate = new Date();
+                var dateText = 'Сегодня ' + currentDate.toLocaleDateString('ru-RU',
+                    { day: 'numeric', month: 'numeric', year: 'numeric' }) + ' г., '
+                    + currentDate.toLocaleDateString('ru-RU', { weekday: 'long' });
+                var timeText = 'Сейчас ' + currentDate.toLocaleTimeString('ru-RU'); 
+                var dateTime = document.createElement('p');
+                dateTime.textContent = dateText + '\n' + timeText;
+                document.body.appendChild(dateTime);
+                dateTime.style.backgroundColor = 'white';
+            } else {
+                alert('Вы не ввели имя.');
+            }
+        }
+        greetUser();
+    </script>
     <br />
+    <div id="cube">
+        <div class="face front"></div>
+        <div class="face back"></div>
+        <div class="face left"></div>
+        <div class="face right"></div>
+        <div class="face top"></div>
+        <div class="face bottom"></div>
+    </div>
+
+    <script>
+        const imageUrls = [
+            'url(./src/big_cat.jpeg)',
+            'url(./src/big_cat.jpeg)',
+            'url(./src/big_cat.jpeg)',
+            'url(./src/big_cat.jpeg)',
+            'url(./src/big_cat.jpeg)',
+            'url(./src/big_cat.jpeg)'
+        ];
+        const faces = document.getElementsByClassName('face');
+        for (let i = 0; i < faces.length; i++) {
+            const face = faces[i];
+            face.style.backgroundImage = imageUrls[i];
+        }
+    </script>
     <table align="center" style="background-color:white; border-radius:50px" width="60%">
         <tr>
             <td>
